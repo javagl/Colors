@@ -86,7 +86,7 @@
                     <configuration>
                          <archive>
                               <manifest>
-                                   <mainClass>de.javagl.colors.brewer.ColorBrewerApp</mainClass>
+                                   <mainClass>de.javagl.colors.brewer.app.ColorBrewerApp</mainClass>
                               </manifest>
                          </archive>
                          <descriptorRefs>
