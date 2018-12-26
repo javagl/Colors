@@ -285,27 +285,8 @@ public class Colors
      */
     public static Color interpolateClamping(Color c0, Color c1, double v)
     {
-        int a0 = c0.getAlpha();
-        int r0 = c0.getRed();
-        int g0 = c0.getGreen();
-        int b0 = c0.getBlue();
-        
-        int a1 = c1.getAlpha();
-        int r1 = c1.getRed();
-        int g1 = c1.getGreen();
-        int b1 = c1.getBlue();
-        
-        int da = a1 - a0;
-        int dr = r1 - r0;
-        int dg = g1 - g0;
-        int db = b1 - b0;
-
-        int a = clamp((int)(a0 + v * da));
-        int r = clamp((int)(r0 + v * dr));
-        int g = clamp((int)(g0 + v * dg));
-        int b = clamp((int)(b0 + v * db));
-        
-        return new Color(r, g, b, a);
+        int argb = interpolateClamping(c0.getRGB(), c1.getRGB(), v);
+        return new Color(argb);
     }
     
     
