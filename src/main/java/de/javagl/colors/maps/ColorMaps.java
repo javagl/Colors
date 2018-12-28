@@ -27,11 +27,13 @@
 package de.javagl.colors.maps;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import de.javagl.colors.Colors;
+import de.javagl.colors.maps.indexed.IndexedColorMap1D;
 
 /**
  * Methods to create {@link ColorMap1D} instances
@@ -102,6 +104,25 @@ public class ColorMaps
     
     
     /**
+     * Creates a new {@link ColorMap1D} that maps a value between 0.0 and 
+     * 1.0 (inclusive) to the colors of the given {@link IndexedColorMap1D},
+     * interpolating between the colors with an unspecified number
+     * of steps.
+     * 
+     * @param indexedColorMap1D The {@link IndexedColorMap1D}
+     * @return The color map
+     */
+    public static ColorMap1D from(IndexedColorMap1D indexedColorMap1D)
+    {
+        List<Color> colors = new ArrayList<Color>();
+        for (int i=0; i<indexedColorMap1D.getSize(); i++)
+        {
+            colors.add(indexedColorMap1D.getColor(i));
+        }
+        return create(DEFAULT_INTERPOLATION_STEPS, colors);
+    }
+    
+    /**
      * Creates a new {@link ColorMap1D} that maps a value between 0.0 
      * and 1.0 (inclusive) to the specified color range, internally 
      * interpolating between the colors with an unspecified number
@@ -141,6 +162,26 @@ public class ColorMaps
     public static ColorMap1D create(int ... argbs)
     {
         return create(DEFAULT_INTERPOLATION_STEPS, argbs);
+    }
+    
+    /**
+     * Creates a new {@link ColorMap1D} that maps a value between 0.0 and 
+     * 1.0 (inclusive) to the colors of the given {@link IndexedColorMap1D},
+     * interpolating between the colors with the given number of steps
+     * 
+     * @param steps The number of interpolation steps
+     * @param indexedColorMap1D The {@link IndexedColorMap1D}
+     * @return The color map
+     */
+    public static ColorMap1D from(int steps, 
+        IndexedColorMap1D indexedColorMap1D)
+    {
+        List<Color> colors = new ArrayList<Color>();
+        for (int i=0; i<indexedColorMap1D.getSize(); i++)
+        {
+            colors.add(indexedColorMap1D.getColor(i));
+        }
+        return create(DEFAULT_INTERPOLATION_STEPS, colors);
     }
     
     /**
