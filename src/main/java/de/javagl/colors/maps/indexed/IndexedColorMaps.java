@@ -138,6 +138,48 @@ public class IndexedColorMaps
         };
     }
     
+    
+    /**
+     * Returns a {@link IndexedColorMap1D} that is "nested" between the given 
+     * colors. This means that arguments that are passed to the 
+     * {@link IndexedColorMap1D#getColor(int)} method will be mapped
+     * to the <code>smaller</code> color when they are negative, and
+     * to the <code>larger</code> color when they are not smaller than
+     * the size of the color map.
+     * 
+     * @param delegate The delegate
+     * @param smaller The color for values smaller than 0
+     * @param larger The color for values that are not smaller than the size
+     * @return The resulting {@link IndexedColorMap1D}
+     */
+    public static IndexedColorMap1D nested(
+        IndexedColorMap1D delegate, Color smaller, Color larger)
+    {
+        Objects.requireNonNull(delegate, "The delegate may not be null");
+        return new IndexedColorMap1D()
+        {
+            @Override
+            public int getSize()
+            {
+                return delegate.getSize();
+            }
+            
+            @Override
+            public Color getColor(int index)
+            {
+                if (index < 0)
+                {
+                    return smaller;
+                }
+                if (index >= getSize())
+                {
+                    return larger;
+                }
+                return delegate.getColor(index);
+            }
+        };
+    }
+    
     /**
      * Private constructor to prevent instantiation
      */
