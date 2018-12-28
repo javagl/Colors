@@ -78,7 +78,7 @@ public class ColorMapPanel1D extends JPanel
      *
      * @param colorMap The {@link ColorMap1D} to be painted
      */
-    ColorMapPanel1D(ColorMap1D colorMap)
+    public ColorMapPanel1D(ColorMap1D colorMap)
     {
         setColorMap(colorMap);
         this.colorSelectionListener = e -> repaint();

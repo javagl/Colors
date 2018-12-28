@@ -69,7 +69,7 @@ public class IndexedColorMapPanel1D extends JPanel
      *
      * @param colorMap The {@link IndexedColorMap1D} to be painted
      */
-    IndexedColorMapPanel1D(IndexedColorMap1D colorMap)
+    public IndexedColorMapPanel1D(IndexedColorMap1D colorMap)
     {
         setColorMap(colorMap);
         this.colorSelectionListener = e -> repaint();
