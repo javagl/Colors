@@ -92,6 +92,48 @@ public class DefaultColorMaps
         return ColorMaps.create(colors);
     }
 
+    /**
+     * Create a default diverging color map, from blue over gray to red.
+     * This color map contains the part of the one that is created with
+     * {@link #createDiverging()} that has a high contrast to 
+     * <code>Color.BLACK</code>.
+     * 
+     * @return The {@link ColorMap1D}
+     */
+    public static ColorMap1D createDivergingBright()
+    {
+        Color colors[] = 
+        {
+            new Color(87, 117, 225),
+            new Color(98, 130, 234), 
+            new Color(108, 142, 241),
+            new Color(119, 154, 247), 
+            new Color(130, 165, 251),
+            new Color(141, 176, 254),
+            new Color(152, 185, 255),
+            new Color(163, 194, 255),
+            new Color(174, 201, 253),
+            new Color(184, 208, 249),
+            new Color(194, 213, 244),
+            new Color(204, 217, 238),
+            new Color(213, 219, 230),
+            new Color(221, 221, 221),
+            new Color(229, 216, 209),
+            new Color(236, 211, 197),
+            new Color(241, 204, 185),
+            new Color(245, 196, 173),
+            new Color(247, 187, 160),
+            new Color(247, 177, 148),
+            new Color(247, 166, 135),
+            new Color(244, 154, 123),
+            new Color(241, 141, 111),
+            new Color(236, 127, 99),
+            new Color(229, 112, 88),
+            new Color(222, 96, 77),
+            new Color(213, 80, 66)
+        };
+        return ColorMaps.create(colors);
+    }
     
     /**
      * Private constructor to prevent instantiation
