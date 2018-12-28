@@ -8,6 +8,7 @@ package de.javagl.colors.brewer.app;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -37,6 +38,9 @@ import de.javagl.colors.ColorStrings;
 import de.javagl.colors.Colors;
 import de.javagl.colors.brewer.ColorBrewer;
 import de.javagl.colors.brewer.ColorSchemeType;
+import de.javagl.colors.maps.ColorMap1D;
+import de.javagl.colors.maps.ColorMaps;
+import de.javagl.colors.ui.ColorMapPanel1D;
 
 /**
  * The main panel for the {@link ColorBrewerApp}
@@ -72,6 +76,11 @@ class ColorBrewerAppPanel extends JPanel
      * The model for the colors table
      */
     private DefaultTableModel colorsTableModel;
+    
+    /**
+     * The panel showing the colors as a {@link ColorMap1D}
+     */
+    private ColorMapPanel1D colorMapPanel;
     
     /**
      * The button for selecting code generation based on colors
@@ -156,7 +165,7 @@ class ColorBrewerAppPanel extends JPanel
      */
     private JPanel createTablePanel()
     {
-        JPanel tablePanel = new JPanel(new GridLayout(1,1));
+        JPanel tablePanel = new JPanel(new BorderLayout());
                 
         colorsTableModel = new DefaultTableModel(new Object[0], 0);
         colorsTable = new JTable(colorsTableModel)
@@ -177,12 +186,25 @@ class ColorBrewerAppPanel extends JPanel
         colorsTable.setDefaultRenderer(Object.class, createCellRenderer());
         colorsTable.setColumnSelectionAllowed(true);
         colorsTable.setRowSelectionAllowed(false);
-
+        tablePanel.add(new JScrollPane(colorsTable), BorderLayout.CENTER);
+        
+        JPanel p = new JPanel(new BorderLayout());
+        p.setBorder(BorderFactory.createTitledBorder("As ColorMap1D:"));
+        colorMapPanel = new ColorMapPanel1D(null);
+        colorMapPanel.setPreferredSize(new Dimension(100, 20));
+        p.add(colorMapPanel, BorderLayout.CENTER);
+        tablePanel.add(p, BorderLayout.SOUTH);
+        
+        
         ListSelectionModel selectionModel = 
             colorsTable.getColumnModel().getSelectionModel();
-        selectionModel.addListSelectionListener(e -> updateCode());
+        selectionModel.addListSelectionListener(e -> 
+        {
+            updateColorMap();
+            updateCode();   
+        });
         
-        tablePanel.add(new JScrollPane(colorsTable));
+        
         return tablePanel;
     }
     
@@ -272,6 +294,25 @@ class ColorBrewerAppPanel extends JPanel
         codePanel.add(new JScrollPane(codeTextArea), BorderLayout.CENTER);
 
         return codePanel;
+    }
+
+    /**
+     * Update the color map that is displayed under the table, based on
+     * the currently selected table column
+     */
+    private void updateColorMap()
+    {
+        colorMapPanel.setColorMap(null);
+        TableColumnModel columnModel = colorsTable.getColumnModel();
+        ListSelectionModel selectionModel = columnModel.getSelectionModel();
+        int selectedColumnIndex = selectionModel.getMinSelectionIndex();
+        if (selectedColumnIndex < 0 || 
+            selectedColumnIndex >= columnModel.getColumnCount())
+        {
+            return;
+        }
+        List<Color> colors = getColorsOfColumn(selectedColumnIndex);
+        colorMapPanel.setColorMap(ColorMaps.create(colors));
     }
     
     /**
