@@ -12,7 +12,7 @@
      <artifactId>colors</artifactId>
      <version>0.0.2-SNAPSHOT</version>
 
-     <name>common</name>
+     <name>colors</name>
      <description>Classes related to colors and color maps</description>
      <url>https://github.com/javagl</url>
 
