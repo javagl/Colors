@@ -62,7 +62,7 @@ public class Colors
     }
     
     /**
-     * Clamp the given value to be in [0,255)
+     * Clamp the given value to be in [0,255]
      * 
      * @param i The input 
      * @return The clamped value
@@ -169,6 +169,136 @@ public class Colors
     }
     
     /**
+     * Returns a the ARGB color that is the same as the given one, but
+     * with the given alpha component.
+     * 
+     * @param a The alpha component
+     * @param argb The ARGB color
+     * @return The ARGB color
+     */
+    public static int withAlpha(int a, int argb)
+    {
+        int r = getRed(argb);
+        int g = getGreen(argb);
+        int b = getBlue(argb);
+        return getARGB(a, r, g, b);
+    }
+    
+    /**
+     * Returns a the ARGB color that is the same as the given one, but
+     * with the given red component.
+     * 
+     * @param r The red component
+     * @param argb The ARGB color
+     * @return The ARGB color
+     */
+    public static int withRed(int r, int argb)
+    {
+        int a = getAlpha(argb);
+        int g = getGreen(argb);
+        int b = getBlue(argb);
+        return getARGB(a, r, g, b);
+    }
+
+    /**
+     * Returns a the ARGB color that is the same as the given one, but
+     * with the given green component.
+     * 
+     * @param g The green component
+     * @param argb The ARGB color
+     * @return The ARGB color
+     */
+    public static int withGreen(int g, int argb)
+    {
+        int a = getAlpha(argb);
+        int r = getRed(argb);
+        int b = getBlue(argb);
+        return getARGB(a, r, g, b);
+    }
+
+
+    /**
+     * Returns a the ARGB color that is the same as the given one, but
+     * with the given blue component.
+     * 
+     * @param b The blue component
+     * @param argb The ARGB color
+     * @return The ARGB color
+     */
+    public static int withBlue(int b, int argb)
+    {
+        int a = getAlpha(argb);
+        int r = getRed(argb);
+        int g = getGreen(argb);
+        return getARGB(a, r, g, b);
+    }
+    
+    
+    /**
+     * Returns a the color that is the same as the given one, but
+     * with the given alpha component.
+     * 
+     * @param a The alpha component
+     * @param color The color
+     * @return The color
+     */
+    public static Color withAlpha(int a, Color color)
+    {
+        int r = color.getRed();
+        int g = color.getGreen();
+        int b = color.getBlue();
+        return new Color(r, g, b, a);
+    }
+    
+    /**
+     * Returns a the color that is the same as the given one, but
+     * with the given red component.
+     * 
+     * @param r The red component
+     * @param color The color
+     * @return The color
+     */
+    public static Color withRed(int r, Color color)
+    {
+        int a = color.getAlpha();
+        int g = color.getGreen();
+        int b = color.getBlue();
+        return new Color(r, g, b, a);
+    }
+
+    /**
+     * Returns a the color that is the same as the given one, but
+     * with the given green component.
+     * 
+     * @param g The green component
+     * @param color The color
+     * @return The color
+     */
+    public static Color withGreen(int g, Color color)
+    {
+        int a = color.getAlpha();
+        int r = color.getRed();
+        int b = color.getBlue();
+        return new Color(r, g, b, a);
+    }
+
+    /**
+     * Returns a the color that is the same as the given one, but
+     * with the given blue component.
+     * 
+     * @param b The blue component
+     * @param color The color
+     * @return The color
+     */
+    public static Color withBlue(int b, Color color)
+    {
+        int a = color.getAlpha();
+        int r = color.getRed();
+        int g = color.getGreen();
+        return new Color(r, g, b, a);
+    }
+    
+    /**
      * Creates an array containing the ARGB values of the given colors
      * 
      * @param colors The colors
@@ -240,7 +370,7 @@ public class Colors
     
     /**
      * Linearly interpolate between the given ARGB colors, clamping each
-     * component to be in [0,255)
+     * component to be in [0,255]
      * <br>
      * 
      * @param argb0 The first color
@@ -275,7 +405,7 @@ public class Colors
     
     /**
      * Linearly interpolate between the given colors, clamping each
-     * component to be in [0,255)
+     * component to be in [0,255]
      * <br>
      * 
      * @param c0 The first color
