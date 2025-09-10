@@ -15,7 +15,6 @@ import javax.swing.colorchooser.ColorSelectionModel;
 
 import de.javagl.colors.selection.ColorSelection;
 import de.javagl.colors.selection.ColorSelections;
-import de.javagl.colors.ui.ColorSelectionView;
 
 /**
  * Simple integration test for the {@link ColorSelectionView} class
