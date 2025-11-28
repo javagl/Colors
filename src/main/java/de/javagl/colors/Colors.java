@@ -327,7 +327,11 @@ public class Colors
         for (int i = 0; i < argbs.length; i++)
         {
             int argb = argbs[i];
-            colors[i] = new Color(argb);
+            int a = getAlpha(argb);
+            int r = getRed(argb);
+            int g = getGreen(argb);
+            int b = getBlue(argb);
+            colors[i] = new Color(r, g, b, a);
         }
         return colors;
     }
@@ -416,7 +420,11 @@ public class Colors
     public static Color interpolateClamping(Color c0, Color c1, double v)
     {
         int argb = interpolateClamping(c0.getRGB(), c1.getRGB(), v);
-        return new Color(argb);
+        int a = getAlpha(argb);
+        int r = getRed(argb);
+        int g = getGreen(argb);
+        int b = getBlue(argb);
+        return new Color(r, g, b, a);
     }
     
     
